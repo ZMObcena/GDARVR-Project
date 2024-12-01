@@ -5,26 +5,37 @@ using UnityEngine;
 public class CupScript : MonoBehaviour
 {
     [Header("Object Requirements")]
-    [SerializeField] private string requiredTag; // Tag of the correct object
-    [SerializeField] private string requiredName; // Name of the correct object
+    [SerializeField] string requiredTag; 
+    [SerializeField] string requiredName;
 
-    [Header("Lock Settings")]
-    [SerializeField] private GameObject lockToUnlock; // Reference to the lock to unlock
+    [Header("Barricade")]
+    [SerializeField] GameObject barricade;
 
-    private bool isUnlocked = false; // Ensure the lock is unlocked only once
+    [Header("Audio Clips")]
+    [SerializeField] AudioSource audioSource; 
+    [SerializeField] AudioClip ding;
+    [SerializeField] AudioClip screech;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isUnlocked) return; // Skip if already unlocked
-
-        // Check if the object's tag and name match the requirements
         if (other.CompareTag(requiredTag) && other.name == requiredName)
         {
-            Debug.Log("Correct object placed on the cup!");
+            audioSource.clip = ding;
+            audioSource.Play();
+            barricade.SetActive(false);
         }
         else
         {
-            Debug.Log($"Incorrect object. Expected tag: {requiredTag}, name: {requiredName}");
+            audioSource.clip = screech;
+            audioSource.Play();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(requiredTag) && other.name == requiredName)
+        {
+            barricade.SetActive(true);
         }
     }
 }

@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chestTransform: {fileID: 443216}
   movementThreshold: 1
-  chestAudioSource: {fileID: 0}
+  chestAudioSource: {fileID: 6176795135938699262}
   chestSounds:
   - {fileID: 8300000, guid: 451f9bf16f1d5844b86d45c08f8f5482, type: 3}
 --- !u!82 &6176795135938699262
