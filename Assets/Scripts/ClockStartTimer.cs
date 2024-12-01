@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -9,15 +10,21 @@ public class ClockStartTimer : MonoBehaviour
     [SerializeField] Collider Trigger;
 
     [Header("Clock Audio Settings")]
-    [SerializeField] private AudioSource clockAudioSource; // Main audio source to adjust
-    [SerializeField] private float volumeIncrement = 0.2f; // Amount to increase volume by
-    [SerializeField] private float maxMainVolume = 1.0f; // Maximum main volume
+    [SerializeField] AudioSource clockAudioSource; // Main audio source to adjust
+    [SerializeField] float volumeIncrement = 0.2f; // Amount to increase volume by
+    [SerializeField] float maxMainVolume = 1.0f; // Maximum main volume
 
     [Header("Heartbeat Audio Settings")]
-    [SerializeField] private AudioSource heartbeatAudioSource; // Heartbeat audio source
-    [SerializeField] private float heartbeatStartDelay = 120f; // Time in seconds before heartbeat starts
-    [SerializeField] private float heartbeatVolumeIncreaseSpeed = 0.01f; // Speed at which heartbeat volume increases
-    [SerializeField] private float maxHeartbeatVolume = 1.0f; // Maximum heartbeat volume
+    [SerializeField] AudioSource heartbeatAudioSource; // Heartbeat audio source
+    [SerializeField] float heartbeatStartDelay = 120f; // Time in seconds before heartbeat starts
+    [SerializeField] float heartbeatVolumeIncreaseSpeed = 0.01f; // Speed at which heartbeat volume increases
+    [SerializeField] float maxHeartbeatVolume = 1.0f; // Maximum heartbeat volume
+
+    [Header("Jumpscare")]
+    [SerializeField] AudioClip jumpscare;
+
+    [Header("Canvas")]
+    [SerializeField] Canvas canvas;
 
     private float clockAudioTimer;
     private float heartbeatTimer;
@@ -27,6 +34,7 @@ public class ClockStartTimer : MonoBehaviour
     private void Start()
     {
         Trigger.enabled = true;
+        canvas.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,6 +89,20 @@ public class ClockStartTimer : MonoBehaviour
                 maxHeartbeatVolume
             );
             Debug.Log($"Heartbeat volume increased to: {heartbeatAudioSource.volume}");
+        }
+
+        if (heartbeatTimer >= 180.0f)
+        {
+            heartbeatAudioSource.volume = 1;
+        }
+
+        if (heartbeatTimer >= 240.0f)
+        {
+            heartbeatAudioSource.clip = jumpscare;
+            heartbeatAudioSource.volume = 0.5f;
+            heartbeatAudioSource.Play();
+            Time.timeScale = 0;
+            canvas.enabled = true;
         }
     }
 }
