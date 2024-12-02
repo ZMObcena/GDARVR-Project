@@ -1,0 +1,5 @@
+/Users/zionobcena/Documents/GDARVR/GDARVR-Project/.utmp/RelWithDebInfo/2u53586h/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/zionobcena/Documents/GDARVR/GDARVR-Project/.utmp/RelWithDebInfo/2u53586h/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Users/zionobcena/Documents/GDARVR/GDARVR-Project/.utmp/RelWithDebInfo/2u53586h/arm64-v8a/GameActivity/CMakeFiles/game.dir
+/Users/zionobcena/Documents/GDARVR/GDARVR-Project/.utmp/RelWithDebInfo/2u53586h/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+/Users/zionobcena/Documents/GDARVR/GDARVR-Project/.utmp/RelWithDebInfo/2u53586h/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
